@@ -1,4 +1,53 @@
+/******************************************************************************
+ *  Compilation:  javac StdArrayIO.java
+ *  Execution:    java StdArrayIO < input.txt
+ *  Dependencies: StdOut.java
+ *  Data files:    https://introcs.cs.princeton.edu/java/22library/tinyDouble1D.txt
+ *                 https://introcs.cs.princeton.edu/java/22library/tinyDouble2D.txt
+ *                 https://introcs.cs.princeton.edu/java/22library/tinyBoolean2D.txt
+ *
+ *  A library for reading in 1D and 2D arrays of integers, doubles,
+ *  and booleans from standard input and printing them out to
+ *  standard output.
+ *
+ *  % more tinyDouble1D.txt
+ *  4
+ *    .000  .246  .222  -.032
+ *
+ *  % more tinyDouble2D.txt
+ *  4 3
+ *    .000  .270  .000
+ *    .246  .224 -.036
+ *    .222  .176  .0893
+ *   -.032  .739  .270
+ *
+ *  % more tinyBoolean2D.txt
+ *  4 3
+ *    1 1 0
+ *    0 0 0
+ *    0 1 1
+ *    1 1 1
+ *
+ *  % cat tinyDouble1D.txt tinyDouble2D.txt tinyBoolean2D.txt | java StdArrayIO
+ *  4
+ *    0.00000   0.24600   0.22200  -0.03200
+ *
+ *  4 3
+ *    0.00000   0.27000   0.00000
+ *    0.24600   0.22400  -0.03600
+ *    0.22200   0.17600   0.08930
+ *    0.03200   0.73900   0.27000
+ *
+ *  4 3
+ *  1 1 0
+ *  0 0 0
+ *  0 1 1
+ *  1 1 1
+ *
+ ******************************************************************************/
+
 package org.sun.util;
+
 
 /**
  *  <i>Standard array IO</i>. This class provides methods for reading
@@ -6,8 +55,8 @@ package org.sun.util;
  *  standard output.
  *  <p>
  *  For additional documentation, see
- *  <a href="http://introcs.cs.princeton.edu/22libary">Section 2.2</a> of
- *  <i>Introduction to Programming in Java: An Interdisciplinary Approach</i>
+ *  <a href="https://introcs.cs.princeton.edu/22libary">Section 2.2</a> of
+ *  <i>Computer Science: An Interdisciplinary Approach</i>
  *  by Robert Sedgewick and Kevin Wayne.
  *
  *  @author Robert Sedgewick
@@ -45,7 +94,6 @@ public class StdArrayIO {
         }
         StdOut.println();
     }
-
 
     /**
      * Reads a 2D array of doubles from standard input and returns it.
@@ -110,7 +158,6 @@ public class StdArrayIO {
         StdOut.println();
     }
 
-
     /**
      * Reads a 2D array of integers from standard input and returns it.
      *
@@ -144,7 +191,6 @@ public class StdArrayIO {
             StdOut.println();
         }
     }
-
 
     /**
      * Reads a 1D array of booleans from standard input and returns it.
@@ -192,7 +238,7 @@ public class StdArrayIO {
         return a;
     }
 
-    /**
+   /**
      * Prints a 2D array of booleans to standard output.
      *
      * @param a the 2D array of booleans
@@ -210,9 +256,10 @@ public class StdArrayIO {
         }
     }
 
-
-    /**
-     * Unit tests <tt>StdArrayIO</tt>.
+   /**
+     * Unit tests {@code StdArrayIO}.
+     *
+     * @param args the command-line arguments
      */
     public static void main(String[] args) {
 
@@ -235,7 +282,7 @@ public class StdArrayIO {
 }
 
 /******************************************************************************
- *  Copyright 2002-2015, Robert Sedgewick and Kevin Wayne.
+ *  Copyright 2002-2022, Robert Sedgewick and Kevin Wayne.
  *
  *  This file is part of algs4.jar, which accompanies the textbook
  *
@@ -257,4 +304,3 @@ public class StdArrayIO {
  *  You should have received a copy of the GNU General Public License
  *  along with algs4.jar.  If not, see http://www.gnu.org/licenses.
  ******************************************************************************/
-
