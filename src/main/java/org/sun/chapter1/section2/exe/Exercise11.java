@@ -27,6 +27,13 @@ public class Exercise11 {
             this.year = year;
         }
 
+        public SmartDate(String date) {
+            String[] split = date.split("/");
+            month = Integer.parseInt(split[0]);
+            day = Integer.parseInt(split[1]);
+            year = Integer.parseInt(split[2]);
+        }
+
         @Override
         public String toString() {
             return month + "/" + day + "/" + year;
