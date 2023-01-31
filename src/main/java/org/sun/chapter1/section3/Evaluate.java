@@ -5,11 +5,19 @@ import org.sun.util.StdOut;
 
 public class Evaluate {
     public static void main(String[] args) {
+
+        String expression = "( 1 + ( ( 2 + 3 ) * ( 4 * 5 ) ) )";
+
+        String[] split = expression.split(" ");
+
         Stack<String> ops = new Stack<>();
         Stack<Double> vals = new Stack<>();
 
-        while (!StdIn.isEmpty()) {
-            String s = StdIn.readString();
+        int index = 0;
+
+        while (index < split.length) {
+            String s = split[index];
+            index++;
 
             StdOut.println("read:" + s);
 
