@@ -46,6 +46,12 @@ public class Stack<Item> implements Iterable<Item> {
         return item;
     }
 
+    public Item peek() {
+        if (isEmpty()) throw new NoSuchElementException();
+
+        return first.item;
+    }
+
     public boolean isEmpty() {
         return first == null;
     }
