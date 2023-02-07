@@ -19,6 +19,16 @@ public class Exercise13 {
             this.amount = amount;
         }
 
+        public Transaction(String transaction) {
+            String[] a = transaction.split("\\s+");
+            this.who = a[0];
+            this.when = new Date(a[1]);
+            this.amount = Double.parseDouble(a[2]);
+            if (Double.isNaN(this.amount) || Double.isInfinite(this.amount)) {
+                throw new IllegalArgumentException("Amount cannot be NaN or infinite");
+            }
+        }
+
         public String getWho() {
             return who;
         }
