@@ -3,7 +3,7 @@ package org.sun.chapter1.section3;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
-public class Bag<Item> implements Iterable<Item> {
+public class Bag<Item> implements IBag<Item>{
 
     private static class Node<Item> {
         private Item item;
@@ -28,6 +28,7 @@ public class Bag<Item> implements Iterable<Item> {
         return s.toString();
     }
 
+    @Override
     public void add(Item item) {
         Node<Item> itemNode = new Node<>();
         itemNode.item = item;
@@ -36,10 +37,12 @@ public class Bag<Item> implements Iterable<Item> {
         n++;
     }
 
+    @Override
     public boolean isEmpty() {
         return first == null;
     }
 
+    @Override
     public int size() {
         return n;
     }

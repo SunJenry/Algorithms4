@@ -3,7 +3,7 @@ package org.sun.chapter1.section3;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
-public class Queue<Item> implements Iterable<Item> {
+public class Queue<Item> implements IQueue<Item> {
 
     private static class Node<Item> {
         private Node<Item> next;
@@ -35,6 +35,7 @@ public class Queue<Item> implements Iterable<Item> {
         return first.item;
     }
 
+    @Override
     public void enqueue(Item item) {
         Node<Item> itemNode = new Node<>();
         itemNode.item = item;
@@ -49,6 +50,7 @@ public class Queue<Item> implements Iterable<Item> {
         count++;
     }
 
+    @Override
     public Item dequeue() {
         if (isEmpty()) throw new NoSuchElementException();
 
@@ -63,7 +65,7 @@ public class Queue<Item> implements Iterable<Item> {
         return dequeue();
     }
 
-    public void push(Item item){
+    public void push(Item item) {
         Node<Item> itemNode = new Node<>();
         itemNode.item = item;
         if (isEmpty()) {
@@ -76,10 +78,12 @@ public class Queue<Item> implements Iterable<Item> {
         count++;
     }
 
+    @Override
     public boolean isEmpty() {
         return first == null;
     }
 
+    @Override
     public int size() {
         return count;
     }
