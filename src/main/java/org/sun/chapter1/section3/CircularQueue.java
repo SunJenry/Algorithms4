@@ -3,32 +3,16 @@ package org.sun.chapter1.section3;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
-public class Queue<Item> implements Iterable<Item> {
+public class CircularQueue<Item> implements Iterable<Item> {
 
     private static class Node<Item> {
-        private Node<Item> next;
-        private Item item;
+        Node<Item> next;
+        Item item;
     }
 
     private Node<Item> first;
     private Node<Item> last;
     private int count;
-
-    public Queue() {
-        first = null;
-        last = null;
-        count = 0;
-    }
-
-    @Override
-    public String toString() {
-        StringBuilder s = new StringBuilder();
-        for (Item item : this) {
-            s.append(item);
-            s.append(' ');
-        }
-        return s.toString();
-    }
 
     public Item peek() {
         if (isEmpty()) throw new NoSuchElementException();
@@ -46,6 +30,8 @@ public class Queue<Item> implements Iterable<Item> {
             last = itemNode;
         }
 
+        last.next = first;
+
         count++;
     }
 
@@ -54,26 +40,15 @@ public class Queue<Item> implements Iterable<Item> {
 
         Item item = first.item;
         first = first.next;
-        if (isEmpty()) last = null;
-        count--;
-        return item;
-    }
 
-    public Item pop() {
-        return dequeue();
-    }
-
-    public void push(Item item){
-        Node<Item> itemNode = new Node<>();
-        itemNode.item = item;
         if (isEmpty()) {
-            first = last = itemNode;
+            last = null;
         } else {
-            itemNode.next = first;
-            first = itemNode;
+            last.next = first;
         }
+        count--;
 
-        count++;
+        return item;
     }
 
     public boolean isEmpty() {
@@ -84,35 +59,35 @@ public class Queue<Item> implements Iterable<Item> {
         return count;
     }
 
+
     @Override
     public Iterator<Item> iterator() {
-        return new LinkedIterator(first);
+        return new CircularQueueIterator(first, last);
     }
 
-    private class LinkedIterator implements Iterator<Item> {
+    private class CircularQueueIterator implements Iterator<Item> {
+
+        private Node<Item> first;
+        private Node<Item> last;
 
         private Node<Item> current;
 
-        public LinkedIterator(Node<Item> node) {
-            current = node;
+        public CircularQueueIterator(Node<Item> first, Node<Item> last) {
+            this.first = first;
+            this.last = last;
+            this.current = first;
         }
 
         @Override
         public boolean hasNext() {
-            return current != null;
+            return current != null && current != last;
         }
 
         @Override
         public Item next() {
-            if (!hasNext()) throw new NoSuchElementException();
             Item item = current.item;
             current = current.next;
             return item;
-        }
-
-        @Override
-        public void remove() {
-            throw new UnsupportedOperationException();
         }
     }
 }

@@ -1,8 +1,9 @@
 package org.sun.chapter1.section3;
 
 import java.util.Iterator;
+import java.util.Objects;
 
-public class LinkedList<Item> implements Iterable<Item> {
+public class LinkedList<Item extends Comparable<Item>> implements Iterable<Item> {
 
     private class Node {
         Item item;
@@ -93,26 +94,42 @@ public class LinkedList<Item> implements Iterable<Item> {
             return;
         }
 
-        if (item.equals(first.item)) {
-            first = first.next;
-        } else {
-            Node pre = first;
-            Node current = pre.next;
-
-            while (current != null) {
-                if (current.item.equals(item)) {
-                    pre.next = current.next;
-                    current = null;
+        Node current = first;
+        while (current != null) {
+            if (current.item.equals(item)) {
+                Node next = current.next;
+                if (next != null) {
+                    current.next = next.next;
                     break;
-                } else {
-                    pre = current;
-                    current = current.next;
                 }
             }
+
+            current = current.next;
         }
 
         size--;
     }
+
+    public void removeAll(Item item) {
+
+        if (isEmpty()) {
+            return;
+        }
+
+        Node current = first;
+        while (current != null) {
+            if (current.item.equals(item)) {
+                Node next = current.next;
+                if (next != null) {
+                    current.next = next.next;
+                    size--;
+                }
+            }
+
+            current = current.next;
+        }
+    }
+
 
     public boolean find(Item item) {
         if (isEmpty()) return false;
@@ -174,6 +191,65 @@ public class LinkedList<Item> implements Iterable<Item> {
             }
             current = current.next;
         }
+    }
+
+    public Item max() {
+
+        if (isEmpty()) return null;
+
+        Node current = first;
+        Node max = first;
+        while (current != null) {
+            if (current.item.compareTo(max.item) > 0) {
+                max = current;
+            }
+            current = current.next;
+        }
+
+        assert max != null;
+        return max.item;
+    }
+
+    public Item maxRecursive() {
+        if (isEmpty()) return null;
+
+        return getMaxRecursive(first.next, first.item);
+    }
+
+    private Item getMaxRecursive(Node node, Item max) {
+        if (node == null) {
+            return max;
+        }
+
+        if (node.item.compareTo(max) > 0) {
+            max = node.item;
+        }
+
+        return getMaxRecursive(node.next, max);
+    }
+
+    public void reverseDestructively() {
+        if (isEmpty() || size() == 1) return;
+
+        Node behind = first;
+        Node mid = behind.next;
+        Node pre = mid.next;
+
+        behind.next = null;
+
+        while (mid != null) {
+
+            mid.next = behind;
+
+            behind = mid;
+            mid = pre;
+
+            if (pre != null) {
+                pre = pre.next;
+            }
+        }
+
+        first = behind;
     }
 
     @Override
