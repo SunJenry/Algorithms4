@@ -78,6 +78,15 @@ public class Queue<Item> implements IQueue<Item> {
         count++;
     }
 
+    public Queue<Item> copy() {
+        Queue<Item> items = new Queue<>();
+        for (Item item : this) {
+            items.enqueue(item);
+        }
+
+        return items;
+    }
+
     @Override
     public boolean isEmpty() {
         return first == null;

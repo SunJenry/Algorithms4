@@ -60,6 +60,21 @@ public class Stack<Item> implements Iterable<Item> {
         return count;
     }
 
+    public Stack<Item> copy() {
+        Stack<Item> items = new Stack<>();
+        Stack<Item> temp = new Stack<>();
+
+        for (Item item : this) {
+            temp.push(item);
+        }
+
+        for (Item item : temp) {
+            items.push(item);
+        }
+
+        return items;
+    }
+
     @Override
     public Iterator<Item> iterator() {
         return new LinkedIterator(first);
