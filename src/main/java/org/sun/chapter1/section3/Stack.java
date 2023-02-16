@@ -1,5 +1,6 @@
 package org.sun.chapter1.section3;
 
+import java.util.ConcurrentModificationException;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
@@ -77,24 +78,34 @@ public class Stack<Item> implements Iterable<Item> {
 
     @Override
     public Iterator<Item> iterator() {
-        return new LinkedIterator(first);
+        return new LinkedIterator(first, count);
     }
 
-    private class LinkedIterator implements Iterator<Item> {
+    public class LinkedIterator implements Iterator<Item> {
 
         private Node<Item> current;
+        private int currentCount;
 
-        public LinkedIterator(Node<Item> current) {
+        public LinkedIterator(Node<Item> current, int count) {
             this.current = current;
+            this.currentCount = count;
         }
 
         @Override
         public boolean hasNext() {
+            if (count != currentCount) {
+                throw new ConcurrentModificationException();
+            }
             return current != null;
         }
 
         @Override
         public Item next() {
+
+            if (count != currentCount) {
+                throw new ConcurrentModificationException();
+            }
+
             if (isEmpty()) throw new NoSuchElementException();
 
             Item item = current.item;
