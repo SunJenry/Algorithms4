@@ -12,11 +12,21 @@ public class Exe19 {
         int matrix4[][] = {{5, 90, 3, 10}, {4, -9, 1, 15}, {7, -1, 9, 19}, {12, 8, 13, 99}};
         int matrix5[][] = {{5, 90, 3, 10}, {4, 1, -7, 15}, {7, -1, -8, 19}, {12, 8, 13, 99}};
 
+        int matrix6[][] ={
+                {0,0,0,0,0,0,0},
+                {0,0,0,0,0,-1,-1},
+                {0,0,0,0,0,-1,-1},
+                {0,0,0,0,0,0,0},
+                {0,0,0,0,0,0,0},
+                {0,-9,0,0,0,0,0},
+                {0,0,0,0,0,0,0}
+        };
         StdOut.println("coordinate:" + Arrays.toString(localMinimumInMatrix(matrix1)));
         StdOut.println("coordinate:" + Arrays.toString(localMinimumInMatrix(matrix2)));
         StdOut.println("coordinate:" + Arrays.toString(localMinimumInMatrix(matrix3)));
         StdOut.println("coordinate:" + Arrays.toString(localMinimumInMatrix(matrix4)));
-        StdOut.print("coordinate:" + Arrays.toString(localMinimumInMatrix(matrix5)));
+        StdOut.println("coordinate:" + Arrays.toString(localMinimumInMatrix(matrix5)));
+        StdOut.println("coordinate:" + Arrays.toString(localMinimumInMatrix(matrix6)));
     }
 
     public static int[] localMinimumInMatrix(int[][] matrix) {
