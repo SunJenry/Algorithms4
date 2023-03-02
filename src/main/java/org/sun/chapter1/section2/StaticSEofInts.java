@@ -42,7 +42,7 @@ public class StaticSEofInts {
         return rankLargest(key) - rankSmallest(key) + 1;
     }
 
-    private int rankSmallest(int key) {
+    public int rankSmallest(int key) {
         int lo = 0;
         int hi = a.length;
 
@@ -64,7 +64,7 @@ public class StaticSEofInts {
         return smallestIndex;
     }
 
-    private int rankLargest(int key) {
+    public int rankLargest(int key) {
         int lo = 0;
         int hi = a.length;
 
