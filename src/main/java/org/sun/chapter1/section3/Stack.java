@@ -4,7 +4,7 @@ import java.util.ConcurrentModificationException;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
-public class Stack<Item> implements Iterable<Item> {
+public class Stack<Item> implements IStack<Item>,Iterable<Item> {
 
     private static class Node<Item> {
         private Item item;
@@ -29,6 +29,7 @@ public class Stack<Item> implements Iterable<Item> {
         return s.toString();
     }
 
+    @Override
     public void push(Item item) {
         Node<Item> itemNode = new Node<>();
         itemNode.item = item;
@@ -37,6 +38,7 @@ public class Stack<Item> implements Iterable<Item> {
         count++;
     }
 
+    @Override
     public Item pop() {
         if (isEmpty()) throw new NoSuchElementException();
 
@@ -47,16 +49,19 @@ public class Stack<Item> implements Iterable<Item> {
         return item;
     }
 
+    @Override
     public Item peek() {
         if (isEmpty()) throw new NoSuchElementException();
 
         return first.item;
     }
 
+    @Override
     public boolean isEmpty() {
         return first == null;
     }
 
+    @Override
     public int size() {
         return count;
     }
