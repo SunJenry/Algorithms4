@@ -45,5 +45,13 @@ public class Exe30 {
         integers.popRight();
 
         //4-3-2
+
+        integers.popRight();
+
+        //4-3
+
+        integers.popRight();
+
+        //4
     }
 }
