@@ -6,7 +6,7 @@ public class QuickFind extends AbsUF {
     }
 
     @Override
-    void union(int p, int q) {
+    public void union(int p, int q) {
         int pId = find(p);
         int qId = find(q);
 
@@ -20,7 +20,7 @@ public class QuickFind extends AbsUF {
     }
 
     @Override
-    int find(int p) {
+    public int find(int p) {
         return ids[p];
     }
 }

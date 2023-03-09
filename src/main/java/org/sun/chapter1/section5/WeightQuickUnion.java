@@ -14,7 +14,7 @@ public class WeightQuickUnion extends AbsUF {
     }
 
     @Override
-    void union(int p, int q) {
+    public void union(int p, int q) {
         int pRoot = find(p);
         int qRoot = find(q);
 
@@ -33,8 +33,12 @@ public class WeightQuickUnion extends AbsUF {
     }
 
     @Override
-    int find(int p) {
+    public int find(int p) {
         while (p != ids[p]) p = ids[p];
         return p;
+    }
+
+    public int[] getSize() {
+        return size;
     }
 }

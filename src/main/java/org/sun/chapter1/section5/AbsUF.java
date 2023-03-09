@@ -14,15 +14,19 @@ public abstract class AbsUF {
         count = N;
     }
 
-    abstract void union(int p, int q);
+    public abstract void union(int p, int q);
 
-    abstract int find(int p);
+    public abstract int find(int p);
 
     public boolean connected(int p, int q) {
         return find(p) == find(q);
     }
 
-    public int count() {
+    public int getCount() {
         return count;
+    }
+
+    public int[] getIds() {
+        return ids;
     }
 }
