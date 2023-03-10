@@ -2,7 +2,6 @@ package org.sun.chapter1.section5;
 
 public abstract class AbsUF {
 
-
     protected final int[] ids;
     protected int count;
 
