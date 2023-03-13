@@ -1,6 +1,6 @@
 package org.sun.chapter1.section5;
 
-public abstract class AbsUF {
+public abstract class AbsUF implements IUF {
 
     protected final int[] ids;
     protected int count;
