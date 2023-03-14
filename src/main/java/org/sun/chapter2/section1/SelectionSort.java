@@ -22,7 +22,7 @@ public class SelectionSort extends AbsSort {
     }
 
     public static void main(String[] args) {
-        Integer[] ints = {9,8,6,5,7,4,2,3,1};
+        Integer[] ints = {9, 8, 6, 5, 7, 4, 2, 3, 1};
         SelectionSort selectionSort = new SelectionSort();
         selectionSort.sort(ints);
         selectionSort.show(ints);
