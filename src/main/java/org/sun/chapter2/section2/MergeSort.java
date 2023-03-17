@@ -28,7 +28,7 @@ public class MergeSort extends AbsSort {
 
     protected void merge(Comparable[] a, int lo, int mid, int hi) {
 
-        StdOut.println("lo:" + lo + " mid:" + mid + " hi:" + hi);
+//        StdOut.println("lo:" + lo + " mid:" + mid + " hi:" + hi);
 
         for (int i = lo; i <= hi; i++) {
             aux[i] = a[i];

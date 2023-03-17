@@ -1,5 +1,7 @@
 package org.sun.chapter2.section2;
 
+import org.sun.util.Util;
+
 public class BottomUpMergeSort extends MergeSort {
     @Override
     public void sort(Comparable[] a) {
@@ -16,9 +18,10 @@ public class BottomUpMergeSort extends MergeSort {
     }
 
     public static void main(String[] args) {
-        Integer[] ints = {9, 8, 6, 5, 7, 4, 2, 3, 1};
+        Comparable[] comparables = Util.generateRandomArray(2000);
         BottomUpMergeSort bottomUpMergeSort = new BottomUpMergeSort();
-        bottomUpMergeSort.sort(ints);
-        bottomUpMergeSort.show(ints);
+        bottomUpMergeSort.sort(comparables);
+        bottomUpMergeSort.isSorted(comparables);
+        bottomUpMergeSort.show(comparables);
     }
 }
