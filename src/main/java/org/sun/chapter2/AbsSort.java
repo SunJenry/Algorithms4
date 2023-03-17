@@ -26,8 +26,13 @@ public abstract class AbsSort {
 
     public boolean isSorted(Comparable[] a) {
         for (int i = 1; i < a.length; i++) {
-            if (less(a[i], a[i - 1])) return false;
+            if (less(a[i], a[i - 1])) {
+                StdOut.println("Not Sorted!!");
+                return false;
+            }
         }
+
+        StdOut.println("Sorted!!");
 
         return true;
     }
