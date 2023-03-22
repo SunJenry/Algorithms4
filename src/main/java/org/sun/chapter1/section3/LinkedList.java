@@ -5,9 +5,21 @@ import java.util.Objects;
 
 public class LinkedList<Item extends Comparable<Item>> implements Iterable<Item> {
 
-    private class Node {
+    public class Node {
         Item item;
         Node next;
+
+        public Item getItem() {
+            return item;
+        }
+
+        public Node getNext() {
+            return next;
+        }
+
+        public void setNext(Node next) {
+            this.next = next;
+        }
     }
 
     private int size;
