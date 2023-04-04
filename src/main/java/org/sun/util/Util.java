@@ -10,4 +10,14 @@ public class Util {
 
         return array;
     }
+
+    public static boolean less(Comparable i, Comparable j) {
+        return i.compareTo(j) < 0;
+    }
+
+    public static void exch(Comparable[] array, int i, int j) {
+        Comparable temp = array[i];
+        array[i] = array[j];
+        array[j] = temp;
+    }
 }
