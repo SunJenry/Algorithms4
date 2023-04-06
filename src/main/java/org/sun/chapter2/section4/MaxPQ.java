@@ -2,7 +2,6 @@ package org.sun.chapter2.section4;
 
 import org.sun.chapter2.section4.exe.Exe15;
 import org.sun.util.StdOut;
-import org.sun.util.Util;
 
 import java.util.Arrays;
 
@@ -11,10 +10,13 @@ public class MaxPQ<Key extends Comparable<Key>> {
     private Key[] pq;
     private int N = 0;
 
+    private Key min;
+
     /**
      * create a priority queue
      */
     public MaxPQ() {
+        pq = (Key[]) new Comparable[2];
     }
 
     /**
@@ -49,8 +51,24 @@ public class MaxPQ<Key extends Comparable<Key>> {
      * @param v
      */
     public void insert(Key v) {
+
+        if (N == pq.length - 1) {
+            resize(2 * N);
+        }
+
+        if (min == null || v.compareTo(min) < 0) {
+            min = v;
+        }
+
         pq[++N] = v;
+
         swim(N);
+    }
+
+    private void resize(int n) {
+        Key[] comparables = (Key[]) new Comparable[n];
+        System.arraycopy(pq, 0, comparables, 0, N);
+        pq = comparables;
     }
 
     /**
@@ -59,7 +77,11 @@ public class MaxPQ<Key extends Comparable<Key>> {
      * @return
      */
     public Key max() {
-        return null;
+        return pq[1];
+    }
+
+    public Key min() {
+        return min;
     }
 
     /**
@@ -77,6 +99,14 @@ public class MaxPQ<Key extends Comparable<Key>> {
         N--;
 
         sink(1);
+
+        if (N < pq.length / 4) {
+            resize(pq.length / 2);
+        }
+
+        if (N == 0) {
+            min = null;
+        }
 
         return max;
     }
