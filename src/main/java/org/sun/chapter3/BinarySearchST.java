@@ -22,6 +22,10 @@ public class BinarySearchST<Key extends Comparable<Key>, Value> extends ST<Key, 
             return;
         }
 
+        if (N == keys.length) {
+            resize(2 * keys.length);
+        }
+
         for (int j = N; j > i; j--) {
             keys[j] = keys[j - 1];
             values[j] = values[j - 1];
@@ -31,14 +35,17 @@ public class BinarySearchST<Key extends Comparable<Key>, Value> extends ST<Key, 
         values[i] = value;
 
         N++;
-
-        if (N == keys.length) {
-            resize(2 * keys.length);
-        }
     }
 
     private void resize(int newSize) {
+        Key[] newKeys = (Key[]) new Comparable[newSize];
+        Value[] newValues = (Value[]) new Object[newSize];
 
+        System.arraycopy(newKeys, 0, keys, 0, size());
+        System.arraycopy(newValues, 0, values, 0, size());
+
+        keys = newKeys;
+        values = newValues;
     }
 
     @Override
@@ -55,7 +62,23 @@ public class BinarySearchST<Key extends Comparable<Key>, Value> extends ST<Key, 
 
     @Override
     public void delete(Key key) {
+        int rank = rank(key);
 
+        if (rank < N && keys[rank].equals(key)) {
+            for (int i = rank; i < N - 1; i++) {
+                keys[i] = keys[i + 1];
+                values[i] = values[i + 1];
+            }
+
+            keys[N - 1] = null;
+            values[N - 1] = null;
+
+            N--;
+
+            if (N < keys.length / 4) {
+                resize(keys.length / 2);
+            }
+        }
     }
 
     @Override
@@ -75,7 +98,14 @@ public class BinarySearchST<Key extends Comparable<Key>, Value> extends ST<Key, 
 
     @Override
     public Key floor(Key key) {
-        return null;
+        int rank = rank(key);
+        if (keys[rank].equals(key)) {
+            return key;
+        } else if (rank == 0) {
+            return null;
+        } else {
+            return keys[rank - 1];
+        }
     }
 
     @Override
