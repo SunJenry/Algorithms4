@@ -41,8 +41,8 @@ public class BinarySearchST<Key extends Comparable<Key>, Value> extends ST<Key, 
         Key[] newKeys = (Key[]) new Comparable[newSize];
         Value[] newValues = (Value[]) new Object[newSize];
 
-        System.arraycopy(newKeys, 0, keys, 0, size());
-        System.arraycopy(newValues, 0, values, 0, size());
+        System.arraycopy(keys, 0, newKeys, 0, size());
+        System.arraycopy(values, 0, newValues, 0, size());
 
         keys = newKeys;
         values = newValues;

@@ -25,7 +25,7 @@ public class Exe7 {
 
     private int frequencyCounter(Integer[] integers) {
 
-        BinarySearchST<Integer, Integer> binarySearchSymbolTable = new BinarySearchST<>(1000000);
+        BinarySearchST<Integer, Integer> binarySearchSymbolTable = new BinarySearchST<>(5);
 
         for (int integer : integers) {
             if (!binarySearchSymbolTable.contains(integer)) {
