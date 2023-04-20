@@ -1,4 +1,4 @@
-package org.sun.chapter3;
+package org.sun.chapter3.section1;
 
 public abstract class ST<Key extends Comparable<Key>, Value> {
 

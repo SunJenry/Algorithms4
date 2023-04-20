@@ -1,7 +1,4 @@
-package org.sun.chapter3;
-
-import org.sun.util.StdIn;
-import org.sun.util.StdOut;
+package org.sun.chapter3.section1;
 
 public class STTestClient {
     public static void main(String[] args) {

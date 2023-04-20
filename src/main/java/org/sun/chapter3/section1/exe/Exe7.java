@@ -1,6 +1,6 @@
-package org.sun.chapter3.exe;
+package org.sun.chapter3.section1.exe;
 
-import org.sun.chapter3.BinarySearchST;
+import org.sun.chapter3.section1.BinarySearchST;
 import org.sun.util.StdOut;
 import org.sun.util.Util;
 

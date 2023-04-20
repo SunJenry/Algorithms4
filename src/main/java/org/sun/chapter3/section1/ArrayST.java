@@ -1,4 +1,4 @@
-package org.sun.chapter3;
+package org.sun.chapter3.section1;
 
 public class ArrayST<Key extends Comparable<Key>, Value> extends ST<Key, Value> {
 

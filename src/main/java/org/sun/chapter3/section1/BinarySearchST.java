@@ -1,4 +1,4 @@
-package org.sun.chapter3;
+package org.sun.chapter3.section1;
 
 import org.sun.chapter1.section3.Queue;
 
