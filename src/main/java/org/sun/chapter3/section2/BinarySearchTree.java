@@ -26,6 +26,7 @@ public class BinarySearchTree<Key extends Comparable<Key>, Value> extends ST<Key
         private Value value;
         private int N;
         private Node left, right;
+        private int height;
 
         public Node(Key key, Value value, int n) {
             this.key = key;
@@ -59,6 +60,9 @@ public class BinarySearchTree<Key extends Comparable<Key>, Value> extends ST<Key
         }
 
         x.N = size(x.left) + size(x.right) + 1;
+
+        x.height = Math.max(heightRecursive(x.left), heightNoRecursive(x.right)) + 1;
+
         return x;
     }
 
@@ -103,6 +107,7 @@ public class BinarySearchTree<Key extends Comparable<Key>, Value> extends ST<Key
         }
 
         x.N = size(x.left) + size(x.right) + 1;
+        x.height = Math.max(heightRecursive(x.left), heightNoRecursive(x.right)) + 1;
 
         return x;
     }
@@ -226,6 +231,7 @@ public class BinarySearchTree<Key extends Comparable<Key>, Value> extends ST<Key
         if (x.left == null) return x.right;
         x.left = deleteMin(x.left);
         x.N = size(x.left) + size(x.right) + 1;
+        x.height = Math.max(heightRecursive(x.left), heightNoRecursive(x.right)) + 1;
         return x;
     }
 
@@ -238,6 +244,7 @@ public class BinarySearchTree<Key extends Comparable<Key>, Value> extends ST<Key
         if (x.right == null) return x.left;
         x.right = deleteMax(x.right);
         x.N = size(x.left) + size(x.right) + 1;
+        x.height = Math.max(heightRecursive(x.left), heightNoRecursive(x.right)) + 1;
         return x;
     }
 
@@ -279,4 +286,77 @@ public class BinarySearchTree<Key extends Comparable<Key>, Value> extends ST<Key
         StdOut.println(x.key);
         print(x.right);
     }
+
+    public int heightNoRecursive() {
+        return heightNoRecursive(root);
+    }
+
+    private int heightNoRecursive(Node x) {
+        if (x == null) return 0;
+        return x.height;
+    }
+
+    public int heightRecursive() {
+        return heightRecursive(root);
+    }
+
+    private int heightRecursive(Node x) {
+        if (x == null) return 0;
+
+        return Math.max(heightRecursive(x.left), heightRecursive(x.right)) + 1;
+    }
+
+    public Value getNoRecursive(Key key) {
+        Node x = root;
+        while (x != null) {
+            int compare = key.compareTo(x.key);
+            if (compare == 0) return x.value;
+            else if (compare > 0) x = x.right;
+            else if (compare < 0) x = x.left;
+        }
+        return null;
+    }
+
+    public void putNoRecursive(Key key, Value value) {
+        Node x = root;
+
+        if (x == null) {
+            root = new Node(key, value, 1);
+        }
+
+        while (x != null) {
+            int compare = key.compareTo(x.key);
+            if (compare == 0) {
+                x.value = value;
+                return;
+            } else if (compare > 0) {
+                x = x.right;
+            } else {
+                x = x.left;
+            }
+        }
+
+        x = root;
+
+        while (true) {
+            int compare = key.compareTo(x.key);
+            x.N++;
+            if (compare > 0) {
+                if (x.right != null) {
+                    x = x.right;
+                } else {
+                    x.right = new Node(key, value, 1);
+                    break;
+                }
+            } else if (compare < 0) {
+                if (x.left != null) {
+                    x = x.left;
+                } else {
+                    x.left = new Node(key, value, 1);
+                    break;
+                }
+            }
+        }
+    }
+
 }
