@@ -40,14 +40,22 @@ public class BinarySearchTree<Key extends Comparable<Key>, Value> extends ST<Key
     public BinarySearchTree() {
     }
 
+    private Node cache;
+
     @Override
     public void put(Key key, Value value) {
+        if (cache != null && cache.key.equals(key)) {
+            cache.value = value;
+            return;
+        }
         root = put(root, key, value);
     }
 
     private Node put(Node x, Key key, Value value) {
         if (x == null) {
-            return new Node(key, value, 1);
+            Node node = new Node(key, value, 1);
+            cache = node;
+            return node;
         }
 
         int compare = key.compareTo(x.key);
@@ -56,6 +64,7 @@ public class BinarySearchTree<Key extends Comparable<Key>, Value> extends ST<Key
         } else if (compare < 0) {
             x.left = put(x.left, key, value);
         } else {
+            cache = x;
             x.value = value;
         }
 
@@ -68,6 +77,9 @@ public class BinarySearchTree<Key extends Comparable<Key>, Value> extends ST<Key
 
     @Override
     public Value get(Key key) {
+        if (cache != null && cache.key.equals(key)) {
+            return cache.value;
+        }
         return get(root, key);
     }
 
@@ -79,6 +91,7 @@ public class BinarySearchTree<Key extends Comparable<Key>, Value> extends ST<Key
         } else if (compare < 0) {
             return get(x.left, key);
         } else {
+            cache = x;
             return x.value;
         }
     }
