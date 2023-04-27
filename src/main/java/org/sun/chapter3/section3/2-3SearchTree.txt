@@ -8,3 +8,5 @@ middle link to a 2-3 search tree with keys between the node's keys and a right l
 As usual, we refer to a link to an empty tree as a null link.
 
 A perfectly balanced 2-3 search tree is one whose null links are all the same distance from the root.
+
+Proposition F. Search and insert operations in a 2-3 tree with N keys are guaranteed to visit at most lgN node.
