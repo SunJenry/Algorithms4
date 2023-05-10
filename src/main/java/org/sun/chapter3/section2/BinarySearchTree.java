@@ -120,7 +120,7 @@ public class BinarySearchTree<Key extends Comparable<Key>, Value> extends ST<Key
         }
 
         x.N = size(x.left) + size(x.right) + 1;
-        x.height = Math.max(heightRecursive(x.left), heightNoRecursive(x.right)) + 1;
+        x.height = Math.max(heightNoRecursive(x.left), heightNoRecursive(x.right)) + 1;
 
         return x;
     }
@@ -244,7 +244,7 @@ public class BinarySearchTree<Key extends Comparable<Key>, Value> extends ST<Key
         if (x.left == null) return x.right;
         x.left = deleteMin(x.left);
         x.N = size(x.left) + size(x.right) + 1;
-        x.height = Math.max(heightRecursive(x.left), heightNoRecursive(x.right)) + 1;
+        x.height = Math.max(heightNoRecursive(x.left), heightNoRecursive(x.right)) + 1;
         return x;
     }
 
@@ -257,7 +257,7 @@ public class BinarySearchTree<Key extends Comparable<Key>, Value> extends ST<Key
         if (x.right == null) return x.left;
         x.right = deleteMax(x.right);
         x.N = size(x.left) + size(x.right) + 1;
-        x.height = Math.max(heightRecursive(x.left), heightNoRecursive(x.right)) + 1;
+        x.height = Math.max(heightNoRecursive(x.left), heightNoRecursive(x.right)) + 1;
         return x;
     }
 

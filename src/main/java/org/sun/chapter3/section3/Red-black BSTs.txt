@@ -1,0 +1,55 @@
+Red-black BSTs
+
+Encoding 3-nodes. The basic idea behind red-black BSTs is to encode 2-3 trees by starting with standard BSTs (which are
+made up of 2-nodes) and adding extra information to encode 3-nodes. We think of the links as being of two different
+types: red links, which bind together two 2-nodes to represent 3-nodes, and black links, which bind together the 2-3
+tree.
+Specifically, we represent 3-nodes as two 2-nodes connected by a single red link that leans left (one of the 2-nodes is
+the left child of the other). One advantage of using such a representation is that it allows us to use our get() code
+for standard BST search without modification. Given any 2-3 tree, we can immediately derive a corresponding BST, just
+by  converting  each node as specified. We refer to BSTs that represent 2-3 trees in this way as red-black BSTs.
+
+An equivalent definition. Another way to proceed is to define red-black BSTs as BSTs having red and black links and
+satisfying the following three restrictions:
+- Red links lean left.
+- No node has two red links connected to it.
+- The tree has perfect black balance: every path from the root to a null link has the same number of black links.
+
+A 1-1 correspondence. If we draw the red links horizontally in a red-black BST, all of the null links are the same
+distance from the root, and if we then collapse together the nodes connected by red links, the result is a 2-3 trees.
+Conversely， if we draw 3-nodes in 2-3 tree as two 2-nodes connected by a red link that leans left, then no node has two
+red links connected to it, and the tree has perfect black balance, since  the black links correspond to the 2-3 tree
+link, which are perfectly balanced by definition. Whichever way we choose to define them, red-black BSTs are both BSTs
+and 2-3 trees. Thus, if we can implement the 2-3 tree insertion algorithm by maintaining the 1-1 correspondence, then we
+get the best of both worlds: the simple and efficient search method from standard BSTs and the efficient insertion-balancing
+method from 2-3 trees.
+
+Color representation. For convenience, since each node is pointed to by precisely on link (from its parent), we encode
+the color of links in nodes, by adding a boolean instance variable color to our Node data type, which is true if the
+link from the parent is red and false if tit is black. By convention, null links are black. For clarity in our code, we
+define constants RED and BLACK for use in setting and testing this variable. We use a private method isRed() to test the
+color of node's link to its parent. When we refer to the color of the node,  we are referring to the color of the link
+pointing to it, and vice versa.
+
+Rotations. The implementation that we will consider might allow right-leaning red links or two red links in a row during
+an operation, but it always corrects these conditions before completion, through judicious use of an operation called
+rotation that switches the orientation of red links. First, suppose that we have a right-leaning red link that needs to
+be rotated to lean to the left. This operation is called a left rotation. We organize the computation as a method that
+takes a link to a red-black BST as argument and, assuming that link to be a Node h whose right link is red, makes the
+necessary adjustments and returns a link to a node that is the root of a red-black BST for the same set of keys whose
+left link is red. If you check each of the lines of code against the before/after drawing in the diagram, you will find
+this operation is easy to understand: we are switching from having the smaller of the two keys at the root to having the
+larger of the two keys at the root. Implementing a right rotation that converts a left-leaning red link to a right-leaning
+one amounts to the same code, with left and right interchanged.
+
+Resetting the link in the parent after a rotation. Whether left or right, every rotation leaves us with a link. We always
+use the link returned by rotateLeft() or rotateRight() to reset the appropriate link in the parent(or the root of the
+tree). That may be a right or a left link, but we can always use it to reset the link in the parent. This link may be
+red or black --- both rotateLeft() and rotateRight() preserve it's color by setting x.color to h.color. This might allow
+two red link in a row to occur within the tree, but our algorithms will also use rotation to correct this condition when
+it arises. For example, the code
+h = rotateLeft(h);
+rotates left a right-leaning red link that is to the right of node h, setting h to point to the root of the resulting sub-
+tree (which contains all the same nodes as the subtree pointed to by h before the rotation, but a different root). The
+ease of writing this type of code is the primary reason we use recursive implementations of BST methods, as it make doing
+rotations an easy supplement to normal insertion, as you will see.
