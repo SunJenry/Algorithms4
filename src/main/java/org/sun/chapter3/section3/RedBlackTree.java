@@ -48,6 +48,17 @@ public class RedBlackTree<Key extends Comparable<Key>, Value> extends ST<Key, Va
 
     @Override
     public Value get(Key key) {
+        Node x = root;
+        while (x != null) {
+            int compare = key.compareTo(x.key);
+            if (compare > 0) {
+                x = x.right;
+            } else if (compare < 0) {
+                x = x.left;
+            } else {
+                return x.value;
+            }
+        }
         return null;
     }
 

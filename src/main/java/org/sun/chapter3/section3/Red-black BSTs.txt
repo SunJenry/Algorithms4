@@ -53,3 +53,11 @@ rotates left a right-leaning red link that is to the right of node h, setting h 
 tree (which contains all the same nodes as the subtree pointed to by h before the rotation, but a different root). The
 ease of writing this type of code is the primary reason we use recursive implementations of BST methods, as it make doing
 rotations an easy supplement to normal insertion, as you will see.
+
+Proposition G. The height of a red-black BST with N nodes is no more than 2lgN
+
+Proposition H. The average length of a path from the root to a node in red-black BST with N nodes is ~1.00logN
+
+Proposition I. In a red-black BST, the following operations take logarithmic time in the worst case: search,insertion,
+finding the minimum, finding the maximum, floor, ceiling, rank, select, delete the minimum, delete the maximum, delete,
+and range count.
