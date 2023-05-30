@@ -25,14 +25,14 @@ public abstract class AbsGraph {
      *
      * @return
      */
-    abstract int V();
+    public abstract int V();
 
     /**
      * number of edges
      *
      * @return
      */
-    abstract int E();
+    public abstract int E();
 
     /**
      * add edge v-w to this graph
@@ -40,7 +40,7 @@ public abstract class AbsGraph {
      * @param v
      * @param w
      */
-    abstract void addEdge(int v, int w);
+    public abstract void addEdge(int v, int w);
 
     /**
      * vertices adjacent to v
@@ -48,7 +48,9 @@ public abstract class AbsGraph {
      * @param v
      * @return
      */
-    abstract Iterable<Integer> adj(int v);
+    public abstract Iterable<Integer> adj(int v);
+
+    public abstract boolean hasEdge(int w, int v);
 
     @Override
     public String toString() {

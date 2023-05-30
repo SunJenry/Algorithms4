@@ -28,12 +28,12 @@ public class DepthFirstPaths extends AbsPath {
     }
 
     @Override
-    boolean hasPathTo(int v) {
+    public boolean hasPathTo(int v) {
         return marked[v];
     }
 
     @Override
-    Iterable<Integer> pathTo(int v) {
+    public Iterable<Integer> pathTo(int v) {
         if (!hasPathTo(v)) return null;
 
         Stack<Integer> path = new Stack<>();

@@ -4,7 +4,7 @@ public abstract class AbsPath {
     public AbsPath(AbsGraph G, int s) {
     }
 
-    abstract boolean hasPathTo(int v);
+    public abstract boolean hasPathTo(int v);
 
-    abstract Iterable<Integer> pathTo(int v);
+    public abstract Iterable<Integer> pathTo(int v);
 }

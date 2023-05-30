@@ -35,24 +35,34 @@ public class AdjacentListGraph extends AbsGraph {
     }
 
     @Override
-    int V() {
+    public int V() {
         return V;
     }
 
     @Override
-    int E() {
+    public int E() {
         return E;
     }
 
     @Override
-    void addEdge(int v, int w) {
+    public void addEdge(int v, int w) {
         adj[v].add(w);
         adj[w].add(v);
         E++;
     }
 
     @Override
-    Iterable<Integer> adj(int v) {
+    public Iterable<Integer> adj(int v) {
         return adj[v];
+    }
+
+    @Override
+    public boolean hasEdge(int w, int v) {
+        for (int i : adj(w)) {
+            if (i == v) {
+                return true;
+            }
+        }
+        return false;
     }
 }

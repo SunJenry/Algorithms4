@@ -9,12 +9,24 @@ public class BreadFirstPaths extends AbsPath {
     private int[] edgeTo;
     private final int s;
 
+    private int[] disTo;
+
     public BreadFirstPaths(AbsGraph G, int s) {
         super(G, s);
 
         marked = new boolean[G.V()];
         edgeTo = new int[G.V()];
         this.s = s;
+
+        disTo = new int[G.V()];
+
+        disTo[s] = 0;
+        for (int vertex = 0; vertex < G.V(); vertex++) {
+            if (vertex == s) {
+                continue;
+            }
+            disTo[vertex] = Integer.MAX_VALUE;
+        }
 
         bfs(G, s);
     }
@@ -29,6 +41,9 @@ public class BreadFirstPaths extends AbsPath {
                 if (!marked[w]) {
                     edgeTo[w] = v;
                     marked[w] = true;
+
+                    disTo[w] = disTo[v] + 1;
+
                     queue.enqueue(w);
                 }
             }
@@ -36,12 +51,12 @@ public class BreadFirstPaths extends AbsPath {
     }
 
     @Override
-    boolean hasPathTo(int v) {
+    public boolean hasPathTo(int v) {
         return marked[v];
     }
 
     @Override
-    Iterable<Integer> pathTo(int v) {
+    public Iterable<Integer> pathTo(int v) {
         if (!hasPathTo(v)) {
             return null;
         }
@@ -55,5 +70,9 @@ public class BreadFirstPaths extends AbsPath {
         path.push(s);
 
         return path;
+    }
+
+    public int disTo(int v) {
+        return disTo[v];
     }
 }
