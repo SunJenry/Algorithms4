@@ -110,7 +110,7 @@ public class TrieST extends AbsStringST {
     Iterable<String> keysThatMatch(String s) {
         Queue<String> q = new Queue<>();
         collect(root, "", s, q);
-        return null;
+        return q;
     }
 
     private void collect(Node x, String pre, String pat, Queue<String> q) {
