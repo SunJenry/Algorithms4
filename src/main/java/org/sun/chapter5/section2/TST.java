@@ -2,6 +2,10 @@ package org.sun.chapter5.section2;
 
 public class TST<Value> {
 
+    public String longestPrefixOf(String input) {
+        return "";
+    }
+
     private class Node {
         Value val;
         char c;
